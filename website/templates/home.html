@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Shop{% endblock %}
+{% block content %}
+<section class="hero">
+    <h1>New season, new fits.</h1>
+    <p>Everyday clothing, honestly priced.</p>
+</section>
+
+<div class="shop-toolbar">
+    <form method="GET" action="/" class="search-form">
+        <input type="text" name="search" placeholder="Search products…" value="{{ search or '' }}">
+        {% if selected_category %}
+            <input type="hidden" name="category" value="{{ selected_category }}">
+        {% endif %}
+        <button type="submit" class="btn-primary">Search</button>
+        {% if search %}
+            <a href="/" class="clear-link">Clear</a>
+        {% endif %}
+    </form>
+
+    <div class="category-pills">
+        <a href="/" class="pill {% if not selected_category %}pill-active{% endif %}">All</a>
+        {% for cat in categories %}
+            <a href="/?category={{ cat }}" class="pill {% if selected_category == cat %}pill-active{% endif %}">{{ cat }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="product-grid">
+    {% for product in products %}
+        <a href="/product/{{ product.id }}" class="product-card">
+            <div class="product-image">
+                <img src="{{ url_for('static', filename='product_images/' + product.image_url) }}"
+                     alt="{{ product.name }}"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-fallback" style="display:none;">{{ product.name[:1] }}</div>
+            </div>
+            <div class="product-info">
+                <span class="product-category">{{ product.category }}</span>
+                <h3>{{ product.name }}</h3>
+                <p class="product-price">${{ '%.2f'|format(product.price) }}</p>
+            </div>
+        </a>
+    {% else %}
+        <p class="empty-state">No products found{% if search %} for "{{ search }}"{% endif %}.</p>
+    {% endfor %}
+</div>
+{% endblock %}

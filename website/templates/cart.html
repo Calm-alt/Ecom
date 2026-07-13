@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Your Cart{% endblock %}
+{% block content %}
+<div class="page-narrow">
+    <h1>Your Cart</h1>
+    {% if cart_items %}
+        <div class="cart-list">
+            {% for item in cart_items %}
+                <div class="cart-row">
+                    <img src="{{ url_for('static', filename='product_images/' + item.product.image_url) }}"
+                         alt="{{ item.product.name }}"
+                         onerror="this.style.display='none';">
+                    <div class="cart-row-info">
+                        <h3>{{ item.product.name }}</h3>
+                        <p class="cart-row-size">Size: {{ item.size }}</p>
+                        <p class="cart-row-price">${{ '%.2f'|format(item.product.price) }} each</p>
+                    </div>
+                    <form method="POST" action="/update-cart-item/{{ item.key }}" class="qty-form">
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="0" max="99">
+                        <button type="submit" class="btn-secondary">Update</button>
+                    </form>
+                    <p class="cart-row-total">${{ '%.2f'|format(item.product.price * item.quantity) }}</p>
+                    <form method="POST" action="/remove-cart-item/{{ item.key }}">
+                        <button type="submit" class="btn-remove" title="Remove">&times;</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="cart-summary">
+            <p>Total: <strong>${{ '%.2f'|format(total) }}</strong></p>
+            <form method="POST" action="/checkout">
+                <button type="submit" class="btn-primary">Checkout</button>
+            </form>
+        </div>
+    {% else %}
+        <p class="empty-state">Your cart is empty.</p>
+        <a href="/" class="btn-primary">Start Shopping</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<div class="pdp">
+    <a href="/" class="back-link">&larr; Back to Shop</a>
+    <div class="pdp-grid">
+        <div class="pdp-image">
+            <img src="{{ url_for('static', filename='product_images/' + product.image_url) }}"
+                 alt="{{ product.name }}"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="image-fallback image-fallback-lg" style="display:none;">{{ product.name[:1] }}</div>
+        </div>
+        <div class="pdp-info">
+            <span class="product-category">{{ product.category }}</span>
+            <h1>{{ product.name }}</h1>
+            <p class="pdp-price">${{ '%.2f'|format(product.price) }}</p>
+            <p class="pdp-description">{{ product.description }}</p>
+
+            {% set in_stock_variants = product.variants|selectattr('stock', 'gt', 0)|list %}
+            <form method="POST" action="/add-to-cart/{{ product.id }}" class="pdp-form">
+                <label for="size">Size</label>
+                {% if in_stock_variants %}
+                    <select name="size" id="size">
+                        {% for variant in product.variants %}
+                            <option value="{{ variant.size }}" {% if variant.stock == 0 %}disabled{% endif %}>
+                                {{ variant.size }}{% if variant.stock == 0 %} — Out of stock{% else %} ({{ variant.stock }} left){% endif %}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn-primary btn-block">Add to Cart</button>
+                {% else %}
+                    <p class="out-of-stock-msg">Out of stock in all sizes.</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

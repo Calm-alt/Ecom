@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Add Product{% endblock %}
+{% block content %}
+<div class="page-narrow">
+    <h1>Add New Product</h1>
+    <form method="POST" class="admin-form">
+        <label>Name</label>
+        <input type="text" name="name" required>
+
+        <label>Category</label>
+        <select name="category">
+            {% for cat in categories %}
+                <option value="{{ cat }}">{{ cat }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Price</label>
+        <input type="number" step="0.01" name="price" required>
+
+        <label>Description</label>
+        <textarea name="description" rows="4"></textarea>
+
+        <label>Image filename <span class="hint">(must already be in static/product_images/, or leave blank)</span></label>
+        <input type="text" name="image_url" placeholder="e.g. hoodie.jpg">
+
+        <label>Sizes and stock <span class="hint">(e.g. S:10, M:15, L:5)</span></label>
+        <input type="text" name="sizes" placeholder="S:10, M:15, L:5" required>
+
+        <button type="submit" class="btn-primary btn-block">Add Product</button>
+    </form>
+    <a href="/admin" class="back-link">&larr; Back to Dashboard</a>
+</div>
+{% endblock %}

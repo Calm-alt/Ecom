@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Order Confirmed{% endblock %}
+{% block content %}
+<div class="page-narrow">
+    <div class="confirm-banner">
+        <h1>Thank you for your order!</h1>
+        <p>Order #{{ order.id }} · <span class="status-badge status-{{ order.status|lower }}">{{ order.status }}</span></p>
+    </div>
+    <div class="order-items">
+        {% for item in order.items %}
+            <div class="order-item-row">
+                <span>{{ item.product.name }} (Size: {{ item.size }}) &times; {{ item.quantity }}</span>
+                <span>${{ '%.2f'|format(item.price_at_purchase * item.quantity) }}</span>
+            </div>
+        {% endfor %}
+    </div>
+    <p class="cart-summary-total">Total: <strong>${{ '%.2f'|format(order.total) }}</strong></p>
+    <a href="/" class="btn-primary">Back to Shop</a>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Edit Product{% endblock %}
+{% block content %}
+<div class="page-narrow">
+    <h1>Edit Product</h1>
+    <form method="POST" class="admin-form">
+        <label>Name</label>
+        <input type="text" name="name" value="{{ product.name }}" required>
+
+        <label>Category</label>
+        <select name="category">
+            {% for cat in categories %}
+                <option value="{{ cat }}" {% if product.category == cat %}selected{% endif %}>{{ cat }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Price</label>
+        <input type="number" step="0.01" name="price" value="{{ product.price }}" required>
+
+        <label>Description</label>
+        <textarea name="description" rows="4">{{ product.description }}</textarea>
+
+        <label>Image filename</label>
+        <input type="text" name="image_url" value="{{ product.image_url }}">
+
+        <button type="submit" class="btn-primary btn-block">Save Changes</button>
+    </form>
+
+    <h2 class="variant-section-title">Sizes</h2>
+    {% if product.variants %}
+        <ul class="variant-list">
+        {% for v in product.variants %}
+            <li>{{ v.size }} — {{ v.stock }} in stock</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p><em>No sizes yet.</em></p>
+    {% endif %}
+    <form method="POST" action="/admin/add-variant/{{ product.id }}" class="inline-form">
+        <input type="text" name="size" placeholder="Size (e.g. XL)" required>
+        <input type="number" name="stock" placeholder="Stock" min="0" required>
+        <button type="submit" class="btn-secondary btn-sm">Add Size</button>
+    </form>
+
+    <a href="/admin" class="back-link">&larr; Back to Dashboard</a>
+</div>
+{% endblock %}

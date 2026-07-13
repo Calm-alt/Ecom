@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}My Orders{% endblock %}
+{% block content %}
+<div class="page-narrow">
+    <h1>My Orders</h1>
+    {% if orders %}
+        {% for order in orders %}
+            <div class="order-card">
+                <div class="order-card-header">
+                    <div>
+                        <strong>Order #{{ order.id }}</strong>
+                        <span class="order-date">{{ order.date_created.strftime('%b %d, %Y') }}</span>
+                    </div>
+                    <span class="status-badge status-{{ order.status|lower }}">{{ order.status }}</span>
+                </div>
+                <div class="order-items">
+                    {% for item in order.items %}
+                        <div class="order-item-row">
+                            <span>{{ item.product.name }} (Size: {{ item.size }}) &times; {{ item.quantity }}</span>
+                            <span>${{ '%.2f'|format(item.price_at_purchase * item.quantity) }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+                <p class="cart-summary-total">Total: <strong>${{ '%.2f'|format(order.total) }}</strong></p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="empty-state">You haven't placed any orders yet.</p>
+        <a href="/" class="btn-primary">Start Shopping</a>
+    {% endif %}
+</div>
+{% endblock %}
