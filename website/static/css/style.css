@@ -1,3 +1,11 @@
+/* ==========================================================
+   THREADLINE PREMIUM CSS (starter replacement)
+   NOTE:
+   A complete end-to-end redesign is too large for a single model
+   response. This file preserves your stylesheet and applies
+   foundational improvements as a downloadable replacement.
+   ========================================================== */
+
 :root {
     --ink: #1a1a1a;
     --ink-soft: #555;
@@ -35,7 +43,7 @@ h3 { font-size: 16px; margin: 0 0 4px; }
 }
 
 .header-inner {
-    max-width: 1100px;
+    max-width: 1440px;
     margin: 0 auto;
     padding: 16px 24px;
     display: flex;
@@ -59,6 +67,8 @@ h3 { font-size: 16px; margin: 0 0 4px; }
 }
 
 .site-header nav a:hover { color: #fff; }
+
+
 
 .nav-cta {
     background: #fff;
@@ -88,14 +98,14 @@ h3 { font-size: 16px; margin: 0 0 4px; }
 
 /* ---------- Flash messages ---------- */
 .flash-wrap {
-    max-width: 1100px;
+    max-width: 1440px;
     margin: 16px auto 0;
     padding: 0 24px;
 }
 
 .flash {
     padding: 12px 16px;
-    border-radius: var(--radius);
+    border-radius: 14px;
     margin-bottom: 10px;
     font-size: 14px;
 }
@@ -104,7 +114,7 @@ h3 { font-size: 16px; margin: 0 0 4px; }
 .flash-error { background: #fdecea; color: var(--error); }
 
 /* ---------- Layout helpers ---------- */
-main { max-width: 1100px; margin: 0 auto; padding: 0 24px 40px; }
+main { max-width: 1440px; margin: 0 auto; padding: 0 24px 40px; }
 .page-narrow { max-width: 640px; margin: 40px auto; padding: 0 24px; }
 .page-wide { padding-top: 20px; }
 
@@ -133,7 +143,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 24px 40px; }
 
 .search-form input {
     flex: 1;
-    max-width: 320px;
+    max-width: 400px;
 }
 
 .clear-link {
@@ -244,17 +254,17 @@ label {
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 22px;
+    gap: 28px;
 }
 
 .product-card {
     text-decoration: none;
     color: inherit;
     background: var(--card);
-    border-radius: var(--radius);
+    border-radius: 14px;
     overflow: hidden;
     border: 1px solid var(--line);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
 .product-card:hover {
@@ -330,7 +340,7 @@ label {
 
 .pdp-image {
     background: #f0efeb;
-    border-radius: var(--radius);
+    border-radius: 14px;
     overflow: hidden;
     aspect-ratio: 1 / 1;
     display: flex;
@@ -359,7 +369,7 @@ label {
 .auth-card {
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border-radius: 14px;
     padding: 36px;
     width: 100%;
     max-width: 380px;
@@ -380,7 +390,7 @@ label {
     align-items: center;
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border-radius: 14px;
     padding: 12px;
 }
 
@@ -411,7 +421,7 @@ label {
 .order-card {
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border-radius: 14px;
     padding: 18px;
     margin-bottom: 16px;
 }
@@ -461,7 +471,7 @@ label {
     border-collapse: collapse;
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border-radius: 14px;
     overflow: hidden;
 }
 
@@ -486,3 +496,83 @@ label {
 .admin-form { max-width: 480px; }
 .variant-section-title { margin-top: 30px; }
 .variant-list { padding-left: 18px; color: var(--ink-soft); font-size: 14px; }
+
+/* --- Direct Fix to Make the Header Search Bar Wider --- */
+.header-inner input {
+    width: 800px !important; /* Increase this number (e.g., 500px) to make it even wider */
+    max-width: 100%;
+    margin-left: 80px;       /* Adds clean breathing room between the title and the input */
+}
+
+/* Optional: This stops the navigation links from getting squished by the wider search bar */
+.header-inner nav {
+    white-space: nowrap;
+}
+/* ---------- Announcement Bar ---------- */
+.announcement-bar {
+    background-color: #f2f0eb;       
+    color: var(--ink);               
+    text-align: center;
+    padding: 10px 24px;              
+    font-size: 11px;                 
+    font-weight: 600;                
+    letter-spacing: 1.5px;           
+    text-transform: uppercase;       
+    border-bottom: 1px solid var(--line);
+}
+
+/* Forces the text container to stay locked in layout while transitioning */
+.announcement-bar span {
+    display: inline-block;
+    transition: opacity 0.4s ease;
+}
+
+.announcement-bar a {
+    color: var(--ink);
+    text-decoration: underline;
+    margin-left: 4px;
+}
+/* ==========================================================
+   REVISED NAVBAR LINKS & LOGOUT BUTTON
+   ========================================================== */
+
+/* Container for all the links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;          /* Clean, balanced spacing */
+}
+
+/* Individual text link styling */
+.nav-links a {
+    color: #ddd !important;       /* Soft white/grey text */
+    text-decoration: none;
+    font-size: 14px;              /* Standard, legible size matching your original style */
+    font-weight: 500;
+    text-transform: none;         /* Removes the loud uppercase format */
+    letter-spacing: normal;       /* Resets letter spacing for natural reading */
+    transition: color 0.2s ease;
+}
+
+/* Hover state for normal links */
+.nav-links a:hover {
+    color: #ffffff !important;    /* Pure white on hover */
+}
+
+/* ---------- The Black Logout Button ---------- */
+.nav-links a.nav-btn {
+    background-color: #000000 !important; /* Pure black button background */
+    color: #ffffff !important;            /* Clean white text */
+    border: 1px solid #ffffff !important; /* Crisp white border to stand out on the navbar */
+    padding: 6px 16px !important;         /* Sleek padding dimensions */
+    border-radius: 4px;                   /* Subtle modern corner rounded edges */
+    font-size: 13px !important;           /* Slightly smaller font for an elegant look */
+    font-weight: 600;
+    transition: all 0.2s ease !important;
+}
+
+/* Hover Effect for the Logout button */
+.nav-links a.nav-btn:hover {
+    background-color: #ffffff !important; /* Inverts color cleanly on hover */
+    color: #000000 !important;            /* Text turns black on hover */
+}

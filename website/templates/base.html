@@ -6,43 +6,106 @@
     <title>{% block title %}Store{% endblock %} · THREADLINE</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="/" class="logo">THREADLINE</a>
-            <nav>
-                <a href="/">Shop</a>
-                <a href="/cart" class="cart-link">Cart{% if cart_count %} <span class="cart-badge">{{ cart_count }}</span>{% endif %}</a>
-                {% if current_user.is_authenticated %}
-                    <a href="/my-orders">Orders</a>
-                    {% if current_user.is_admin %}
-                        <a href="/admin">Admin</a>
-                    {% endif %}
-                    <a href="/logout">Log Out</a>
-                {% else %}
-                    <a href="/login">Log In</a>
-                    <a href="/sign-up" class="nav-cta">Sign Up</a>
-                {% endif %}
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-wrap">
-                    {% for category, message in messages %}
-                        <div class="flash flash-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+<header class="site-header">
+    <div class="header-inner">
 
-        {% block content %}{% endblock %}
-    </main>
+        <a href="/" class="logo">
+            THREADLINE
+        </a>
 
-    <footer class="site-footer">
-        <p>THREADLINE — a small demo store built with Flask.</p>
-    </footer>
+        <form class="nav-search" method="GET" action="/">
+            <input
+                type="text"
+                name="q"
+                placeholder="Search products..."
+                value="{{ request.args.get('q','') }}">
+        </form>
+
+       <nav class="nav-links">
+    <a href="/">Shop</a>
+    <a href="/cart" class="cart-link">
+        Cart {% if cart_count %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}
+    </a>
+    
+    {% if current_user.is_authenticated %}
+        <a href="/my-orders">Orders</a>
+        {% if current_user.is_admin %}
+            <a href="/admin">Admin</a>
+        {% endif %}
+        <!-- Ensure class="nav-btn" is attached here -->
+        <a href="/logout" class="nav-btn">Logout</a> 
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/sign-up" class="nav-signup">Sign Up</a>
+    {% endif %}
+</nav>
+
+    </div>
+</header>
+
+<!-- The Announcement Bar (With explicit height properties to prevent layout shifting) -->
+<div class="announcement-bar" style="min-height: 38px; display: flex; align-items: center; justify-content: center;">
+    <span id="announcement-text" style="transition: opacity 0.4s ease; opacity: 1;">BUNDLE & SAVE ON BEST SELLERS → <a href="#">SHOP NOW</a></span>
+</div>
+
+<!-- Scoped Script to safely rotate messages -->
+<script>
+(function() {
+    const bannerAlerts = [
+        'BUNDLE & SAVE ON BEST SELLERS → <a href="#">SHOP NOW</a>',
+        'FREE SHIPPING ON ALL ORDERS OVER $75',
+        'NEW SUMMER COLLECTION HAS DROPPED → <a href="#">EXPLORE</a>'
+    ];
+    
+    let currentIndex = 0;
+    const textElement = document.getElementById('announcement-text');
+
+    if (textElement) {
+        function rotateAnnouncement() {
+            textElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % bannerAlerts.length;
+                textElement.innerHTML = bannerAlerts[currentIndex];
+                textElement.style.opacity = 1;
+            }, 400); 
+        }
+
+        setInterval(rotateAnnouncement, 4000);
+    }
+})();
+</script>
+
+<main>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+
+            <div class="flash-wrap">
+
+                {% for category, message in messages %}
+
+                    <div class="flash flash-{{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+</main>
+
+<footer class="site-footer">
+    <p>THREADLINE — a small store built with love.</p>
+</footer>
+
 </body>
 </html>
