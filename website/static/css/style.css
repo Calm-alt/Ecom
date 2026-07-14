@@ -64,13 +64,18 @@ h3 { font-size: 16px; margin: 0 0 4px; }
     flex-shrink: 0;
 }
 
-/* Search input in header — wide, centered, never overflows */
-.header-inner input {
+/* Search form + input in header — doubled width, never overflows */
+.nav-search {
     flex: 1;
-    width: 100%;
-    max-width: 900px;
+    display: flex;
+    max-width: 1800px; /* doubled from 900px */
     min-width: 0;
     margin: 0 32px;
+}
+
+.header-inner input {
+    width: 100%;
+    min-width: 0;
     border: 1px solid transparent;
     background: #ffffff;
 }
@@ -126,14 +131,36 @@ h3 { font-size: 16px; margin: 0 0 4px; }
     font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
+/* Stronger glow on hover for Shop / Cart / Orders / Admin */
 .nav-links a:hover {
     color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.85), 0 0 18px var(--accent);
 }
 
-.nav-links a.nav-btn,
+/* Logout — distinct square button, not a pill */
+.nav-links a.nav-btn {
+    background-color: var(--accent-dark);
+    color: #ffffff;
+    border: none;
+    border-radius: 0;
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-links a.nav-btn:hover {
+    background-color: #7a3717;
+    color: #ffffff;
+    text-shadow: none;
+    box-shadow: 0 0 14px rgba(194, 98, 45, 0.7);
+}
+
 .submit-btn {
     background-color: transparent;
     color: #ffffff;
@@ -146,7 +173,7 @@ h3 { font-size: 16px; margin: 0 0 4px; }
     letter-spacing: 1px;
 }
 
-.nav-links a.nav-btn:hover {
+.submit-btn:hover {
     background-color: var(--accent);
     border-color: var(--accent);
     color: #ffffff;
@@ -313,14 +340,14 @@ p.hero-subtitle {
     gap: 8px;
 }
 
-/* Pills — fixed the low-contrast/faded text */
+/* Category filters — now square, not pill-shaped */
 .pill,
 .filter-btn,
 button[class*="category"],
 .category-filters button {
     border: 1px solid var(--line);
     padding: 8px 18px;
-    border-radius: 30px;
+    border-radius: 0;
     text-decoration: none;
     font-size: 13px;
     font-weight: 600;
@@ -339,7 +366,7 @@ button[class*="category"],
     color: var(--accent-dark);
 }
 
-/* Single source of truth for the "active" pill state */
+/* Single source of truth for the "active" pill state — also square */
 .pill-active,
 .active,
 .pills-container a.active,
@@ -351,7 +378,7 @@ button[class*="category"],
     background-color: var(--ink);
     color: #ffffff;
     border: 1px solid var(--ink);
-    border-radius: 30px;
+    border-radius: 0;
     font-weight: 600;
 }
 
@@ -866,6 +893,9 @@ label {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
 }
 
 .admin-header .btn-primary,
@@ -877,23 +907,50 @@ label {
     background-color: var(--accent);
 }
 
-.table-wrap { overflow-x: auto; margin-bottom: 20px; }
+/* Card-style panels around each admin section so the page doesn't look bland/flat */
+.admin-section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px 28px 28px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 14px rgba(23, 26, 35, 0.05);
+}
+
+.admin-section h2 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.table-wrap { overflow-x: auto; margin-bottom: 0; }
 
 .admin-table {
     width: 100%;
     border-collapse: collapse;
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 10px;
     overflow: hidden;
 }
 
 .admin-table th, .admin-table td {
-    padding: 10px 14px;
+    padding: 12px 14px;
     text-align: left;
     border-bottom: 1px solid var(--line);
     font-size: 14px;
 }
+
+.admin-table tr:last-child td { border-bottom: none; }
+
+.admin-table tr:hover td { background-color: #faf8f4; }
 
 .admin-table th {
     background: #f2f0eb;
@@ -903,7 +960,7 @@ label {
     color: var(--ink-soft);
 }
 
-/* Edit / Delete — now real buttons instead of underlined text links */
+/* Edit / Delete — real buttons instead of underlined text links */
 .actions-cell {
     vertical-align: middle;
     display: flex;
@@ -912,6 +969,7 @@ label {
 }
 
 .actions-cell a,
+.actions-cell button,
 td a[href*="edit" i],
 td a[href*="delete" i] {
     display: inline-block;
@@ -926,6 +984,7 @@ td a[href*="delete" i] {
     cursor: pointer;
     transition: all 0.2s ease;
     margin-right: 0;
+    font-family: inherit;
 }
 
 a[href*="edit" i], .edit-link {
@@ -939,12 +998,12 @@ a[href*="edit" i]:hover, .edit-link:hover {
     border-color: var(--info);
 }
 
-a[href*="delete" i], .delete-link {
+.delete-btn, a[href*="delete" i], .delete-link {
     color: var(--error);
     background: var(--error-bg);
     border-color: #f3c4bd;
 }
-a[href*="delete" i]:hover, .delete-link:hover {
+.delete-btn:hover, a[href*="delete" i]:hover, .delete-link:hover {
     background: var(--error);
     color: #fff;
     border-color: var(--error);
@@ -999,7 +1058,7 @@ select,
     .header-inner {
         flex-wrap: wrap;
     }
-    .header-inner input {
+    .nav-search {
         margin: 8px 0 0;
         order: 3;
         max-width: 100%;
