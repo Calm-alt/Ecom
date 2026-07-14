@@ -1,17 +1,23 @@
 /* ==========================================================
-   THREADLINE — CLEAN CONSOLIDATED STYLESHEET
-   All duplicate rules merged. Latest values from your file kept.
+   THREADLINE — COLOR MAKEOVER STYLESHEET
+   Deep navy-ink + warm terracotta accent, cream background.
    ========================================================== */
 
 :root {
-    --ink: #1a1a1a;
-    --ink-soft: #555;
-    --paper: #faf9f7;
+    --ink: #171a23;          /* deep navy-charcoal, replaces flat black */
+    --ink-soft: #5b5f6b;
+    --paper: #f7f4ef;        /* warm cream background */
     --card: #ffffff;
-    --line: #e6e3de;
-    --accent: #b5651d;
-    --success: #2e7d32;
-    --error: #c62828;
+    --line: #e4dfd6;
+    --accent: #c2622d;       /* warm terracotta — primary brand accent */
+    --accent-dark: #9c4a1e;
+    --gold: #b8935a;         /* secondary highlight for active/hover states */
+    --success: #2f7d5c;
+    --success-bg: #e5f3ec;
+    --error: #c0392b;
+    --error-bg: #fbe9e7;
+    --info: #2563eb;
+    --info-bg: #eaf1ff;
     --radius: 10px;
 }
 
@@ -58,13 +64,21 @@ h3 { font-size: 16px; margin: 0 0 4px; }
     flex-shrink: 0;
 }
 
-/* Search input in header — fixed to not overflow the row */
+/* Search input in header — wide, centered, never overflows */
 .header-inner input {
-    width: 100%;
-    max-width: 800px;
-    margin-left: 40px;
     flex: 1;
-    min-width: 0; /* lets it shrink instead of forcing overflow */
+    width: 100%;
+    max-width: 900px;
+    min-width: 0;
+    margin: 0 32px;
+    border: 1px solid transparent;
+    background: #ffffff;
+}
+
+.header-inner input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(194, 98, 45, 0.15);
 }
 
 .header-inner nav {
@@ -72,7 +86,7 @@ h3 { font-size: 16px; margin: 0 0 4px; }
 }
 
 .site-header nav a {
-    color: #ddd;
+    color: #cfcfd6;
     text-decoration: none;
     margin-left: 20px;
     font-size: 14px;
@@ -81,8 +95,8 @@ h3 { font-size: 16px; margin: 0 0 4px; }
 .site-header nav a:hover { color: #fff; }
 
 .nav-cta {
-    background: #fff;
-    color: var(--ink) !important;
+    background: var(--accent);
+    color: #fff !important;
     padding: 6px 14px;
     border-radius: 20px;
     font-weight: 600;
@@ -106,35 +120,35 @@ h3 { font-size: 16px; margin: 0 0 4px; }
 }
 
 .nav-links a {
-    color: #000000;
+    color: #cfcfd6;
     text-decoration: none;
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    transition: opacity 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-    opacity: 0.6;
+    color: #ffffff;
 }
 
 .nav-links a.nav-btn,
 .submit-btn {
     background-color: transparent;
-    color: #000000;
-    border: 1px solid #222222;
-    border-radius: 4px;
-    padding: 8px 16px;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    padding: 8px 18px;
     font-size: 12px;
     font-weight: 600;
-    text-transform: none;
-    letter-spacing: 0.2px;
-    opacity: 1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .nav-links a.nav-btn:hover {
-    background-color: #000000;
+    background-color: var(--accent);
+    border-color: var(--accent);
     color: #ffffff;
 }
 
@@ -142,7 +156,7 @@ h3 { font-size: 16px; margin: 0 0 4px; }
 .announcement-bar,
 .banner,
 div[style*="background-color"][style*="orders over"] {
-    background-color: #111111;
+    background-color: #23262f;
     color: #ffffff;
     text-align: center;
     padding: 10px 24px;
@@ -150,7 +164,16 @@ div[style*="background-color"][style*="orders over"] {
     font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.announcement-bar,
+.announcement-bar *,
+.banner,
+.banner *,
+div[style*="background-color"][style*="orders over"],
+div[style*="background-color"][style*="orders over"] * {
+    color: #ffffff !important;
 }
 
 .announcement-bar span {
@@ -161,10 +184,10 @@ div[style*="background-color"][style*="orders over"] {
 .announcement-bar a,
 .banner a,
 div[style*="background-color"] a {
-    color: #ffffff;
     text-decoration: underline;
     font-weight: 700;
     margin-left: 4px;
+    color: var(--gold) !important;
 }
 
 /* ---------- Footer ---------- */
@@ -198,13 +221,13 @@ div[style*="background-color"] a {
 }
 
 .flash-success {
-    background: #e6f4ea;
+    background: var(--success-bg);
     color: var(--success);
     border-left-color: var(--success);
 }
 
 .flash-error {
-    background: #fdecea;
+    background: var(--error-bg);
     color: var(--error);
     border-left-color: var(--error);
 }
@@ -237,10 +260,10 @@ main {
 .hero h1,
 h1.hero-title {
     font-size: 28px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: #000000;
+    color: var(--ink);
     margin-bottom: 12px;
 }
 
@@ -249,7 +272,8 @@ p.hero-subtitle {
     font-size: 11px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #666666;
+    color: var(--accent-dark);
+    font-weight: 600;
 }
 
 /* ---------- Shop toolbar ---------- */
@@ -289,17 +313,18 @@ p.hero-subtitle {
     gap: 8px;
 }
 
+/* Pills — fixed the low-contrast/faded text */
 .pill,
 .filter-btn,
 button[class*="category"],
 .category-filters button {
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--line);
     padding: 8px 18px;
     border-radius: 30px;
     text-decoration: none;
     font-size: 13px;
-    font-weight: 500;
-    color: #666666;
+    font-weight: 600;
+    color: var(--ink);
     background: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -309,8 +334,9 @@ button[class*="category"],
 
 .pill:hover,
 .filter-btn:hover {
-    border-color: var(--ink);
-    background-color: #fafafa;
+    border-color: var(--accent);
+    background-color: #fdf3ec;
+    color: var(--accent-dark);
 }
 
 /* Single source of truth for the "active" pill state */
@@ -322,11 +348,10 @@ button[class*="category"],
 .filter-btn.active,
 [class*="pill" i][class*="active" i],
 [class*="filter" i] .active {
-    background-color: transparent;
-    color: #000000;
-    border: 1px solid transparent;
-    border-bottom: 2px solid #000000;
-    border-radius: 0px;
+    background-color: var(--ink);
+    color: #ffffff;
+    border: 1px solid var(--ink);
+    border-radius: 30px;
     font-weight: 600;
 }
 
@@ -344,17 +369,17 @@ button, .btn-primary, .btn-secondary {
 }
 
 .btn-primary {
-    background-color: var(--ink);
+    background-color: var(--accent);
     color: #fff;
 }
-.btn-primary:hover { background-color: #333; }
+.btn-primary:hover { background-color: var(--accent-dark); }
 
 .btn-secondary {
     background: #fff;
     color: var(--ink);
     border: 1px solid var(--line);
 }
-.btn-secondary:hover { background: #f2f2f2; }
+.btn-secondary:hover { background: #f2f0eb; }
 
 .btn-sm { padding: 6px 12px; font-size: 13px; }
 .btn-block { width: 100%; }
@@ -426,7 +451,7 @@ label {
 
 .product-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 24px rgba(23, 26, 35, 0.1);
 }
 
 .product-image {
@@ -477,7 +502,8 @@ label {
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--ink-soft);
+    color: var(--accent-dark);
+    font-weight: 600;
 }
 
 .product-price {
@@ -514,10 +540,10 @@ label {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #000;
+    color: var(--ink);
     text-decoration: none;
     background: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid var(--line);
     border-radius: 4px;
     padding: 10px 18px;
     margin-bottom: 24px;
@@ -525,9 +551,9 @@ label {
 }
 
 .back-to-shop:hover {
-    background: #000;
+    background: var(--ink);
     color: #fff;
-    border-color: #000;
+    border-color: var(--ink);
     gap: 10px;
 }
 
@@ -557,7 +583,7 @@ label {
 
 .pdp-image:hover img { transform: scale(1.1); }
 
-.pdp-price { font-size: 22px; font-weight: 700; margin: 6px 0 16px; }
+.pdp-price { font-size: 22px; font-weight: 700; margin: 6px 0 16px; color: var(--accent-dark); }
 .pdp-description { color: var(--ink-soft); margin-bottom: 8px; }
 .pdp-form { max-width: 320px; margin-top: 20px; }
 .out-of-stock-msg { color: var(--error); font-weight: 600; }
@@ -612,28 +638,28 @@ label {
 
 .product-detail-info .category {
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    color: #888888;
+    color: var(--accent-dark);
     margin-bottom: 8px;
 }
 
 .product-detail-info h1 {
     font-size: 28px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: #000000;
+    color: var(--ink);
     margin-bottom: 12px;
 }
 
 .product-detail-info .price {
     font-size: 22px;
     font-weight: 700;
-    color: #111111;
+    color: var(--ink);
     margin-bottom: 32px;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid var(--line);
     padding-bottom: 24px;
 }
 
@@ -642,7 +668,7 @@ label {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #222222;
+    color: var(--ink-soft);
     margin-bottom: 8px;
     display: block;
 }
@@ -651,10 +677,10 @@ label {
     width: 100%;
     padding: 12px 16px;
     font-size: 14px;
-    border: 1px solid #dddddd;
+    border: 1px solid var(--line);
     border-radius: 6px;
     background-color: #ffffff;
-    color: #111111;
+    color: var(--ink);
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -667,13 +693,13 @@ label {
 
 .product-detail-info select:focus {
     outline: none;
-    border-color: #000000;
+    border-color: var(--accent);
 }
 
 .product-detail-info button,
 .product-detail-info input[type="submit"] {
     width: 100%;
-    background-color: #000000;
+    background-color: var(--ink);
     color: #ffffff;
     padding: 16px;
     font-size: 14px;
@@ -689,9 +715,9 @@ label {
 
 .product-detail-info button:hover,
 .product-detail-info input[type="submit"]:hover {
-    background-color: #222222;
+    background-color: var(--accent);
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(194, 98, 45, 0.25);
 }
 
 .product-detail-info button:active,
@@ -709,16 +735,16 @@ label {
 .size-btn {
     padding: 14px 0;
     background: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid var(--line);
     border-radius: 4px;
     font-size: 13px;
     font-weight: 600;
-    color: #111;
+    color: var(--ink);
     cursor: pointer;
     transition: all 0.2s ease;
 }
-.size-btn:hover { border-color: #000; }
-.size-btn.selected { background: #000; color: #fff; border-color: #000; }
+.size-btn:hover { border-color: var(--accent); }
+.size-btn.selected { background: var(--ink); color: #fff; border-color: var(--ink); }
 .size-btn-disabled, .size-btn:disabled {
     color: #ccc;
     border-color: #eee;
@@ -744,8 +770,9 @@ label {
 
 .auth-subtext { color: var(--ink-soft); font-size: 14px; margin-top: 8px; margin-bottom: 20px; }
 .auth-switch { text-align: center; font-size: 14px; margin-top: 16px; color: var(--ink-soft); }
-.auth-card form button { margin-top: 20px; }
-.auth-switch a { text-decoration: underline; color: var(--ink); }
+.auth-card form button { margin-top: 20px; background-color: var(--accent); }
+.auth-card form button:hover { background-color: var(--accent-dark); }
+.auth-switch a { text-decoration: underline; color: var(--accent-dark); font-weight: 600; }
 
 /* ---------- Cart ---------- */
 .cart-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
@@ -770,7 +797,7 @@ label {
 }
 
 .cart-row-size, .cart-row-price { font-size: 13px; color: var(--ink-soft); margin: 2px 0 0; }
-.cart-row-total { font-weight: 700; white-space: nowrap; }
+.cart-row-total { font-weight: 700; white-space: nowrap; color: var(--accent-dark); }
 .qty-form { display: flex; gap: 6px; }
 .qty-form input { width: 55px; }
 
@@ -824,14 +851,14 @@ label {
     letter-spacing: 0.5px;
 }
 
-.status-pending { background: #fff4e0; color: #a05a00; }
-.status-shipped { background: #e3edff; color: #1a4fb4; }
-.status-delivered { background: #e6f4ea; color: var(--success); }
+.status-pending { background: #fdf1e0; color: #a05a00; }
+.status-shipped { background: var(--info-bg); color: var(--info); }
+.status-delivered { background: var(--success-bg); color: var(--success); }
 .status-cancelled,
 [class*="cancelled" i] {
-    background-color: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #fca5a5;
+    background-color: var(--error-bg);
+    color: var(--error);
+    border: 1px solid #f3c4bd;
 }
 
 /* ---------- Admin ---------- */
@@ -839,6 +866,15 @@ label {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.admin-header .btn-primary,
+.admin-header button {
+    background-color: var(--ink);
+}
+.admin-header .btn-primary:hover,
+.admin-header button:hover {
+    background-color: var(--accent);
 }
 
 .table-wrap { overflow-x: auto; margin-bottom: 20px; }
@@ -867,29 +903,51 @@ label {
     color: var(--ink-soft);
 }
 
-.actions-cell { vertical-align: middle; }
+/* Edit / Delete — now real buttons instead of underlined text links */
+.actions-cell {
+    vertical-align: middle;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
 
 .actions-cell a,
-td a,
-a[href*="edit" i],
-a[href*="delete" i] {
+td a[href*="edit" i],
+td a[href*="delete" i] {
     display: inline-block;
-    background: none;
-    border: none;
-    padding: 0;
-    font-size: 13px;
-    font-weight: 500;
     text-decoration: none;
-    margin-right: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid transparent;
     cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 0;
 }
 
 a[href*="edit" i], .edit-link {
-    color: #2563eb;
+    color: var(--info);
+    background: var(--info-bg);
+    border-color: #cfe0fd;
+}
+a[href*="edit" i]:hover, .edit-link:hover {
+    background: var(--info);
+    color: #fff;
+    border-color: var(--info);
 }
 
 a[href*="delete" i], .delete-link {
-    color: #dc2626;
+    color: var(--error);
+    background: var(--error-bg);
+    border-color: #f3c4bd;
+}
+a[href*="delete" i]:hover, .delete-link:hover {
+    background: var(--error);
+    color: #fff;
+    border-color: var(--error);
 }
 
 .admin-form { max-width: 480px; }
@@ -900,11 +958,11 @@ select,
 .status-dropdown {
     min-width: 120px;
     padding: 6px 12px;
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--line);
     border-radius: 6px;
     font-size: 13px;
     background-color: #ffffff;
-    color: #374151;
+    color: var(--ink);
     cursor: pointer;
 }
 
@@ -917,7 +975,7 @@ select,
     right: -2px;
     bottom: -2px;
     border-radius: 10px;
-    background: linear-gradient(135deg, #ff3700, #ff9d00, #e60000, #ff5100);
+    background: linear-gradient(135deg, var(--accent), var(--gold), var(--accent-dark), var(--accent));
     background-size: 400% 400%;
     z-index: -1;
     opacity: 0;
@@ -942,7 +1000,7 @@ select,
         flex-wrap: wrap;
     }
     .header-inner input {
-        margin-left: 0;
+        margin: 8px 0 0;
         order: 3;
         max-width: 100%;
     }
