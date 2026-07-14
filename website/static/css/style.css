@@ -525,7 +525,7 @@ label {
 /* --- Direct Fix to Make the Header Search Bar Wider --- */
 .header-inner input {
     width: 800px !important; /* Increase this number (e.g., 500px) to make it even wider */
-    max-width: 100%;
+    max-width: 800px !important; /* Ensures it doesn't exceed the desired width */
     margin-left: 80px;       /* Adds clean breathing room between the title and the input */
 }
 
@@ -1191,4 +1191,13 @@ button[class*="category"],
     background: #000 !important;
     color: #fff !important;
     border-color: #000;
+}
+
+/* --- Reduce hero spacing by 25% --- */
+main {
+    padding-top: 30px !important;   /* was 40px */
+}
+
+.hero {
+    padding: 45px 20px 40px !important;   /* top was 60px, now 45px */
 }
