@@ -7,6 +7,10 @@ views = Blueprint('views', __name__)
 
 CATEGORIES = ['Shirts', 'Jackets', 'Shoes', 'Pants', 'Accessories']
 
+@views.route("/explore")
+def explore():
+    return render_template("explore.html")
+
 
 @views.route('/')
 def home():

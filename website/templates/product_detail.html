@@ -1,38 +1,73 @@
 {% extends "base.html" %}
 {% block title %}{{ product.name }}{% endblock %}
+
 {% block content %}
-<div class="pdp">
-    <a href="/" class="back-link">&larr; Back to Shop</a>
-    <div class="pdp-grid">
-        <div class="pdp-image">
+<!-- Main Centered Container Wrap -->
+<div class="product-detail-container pdp">
+    
+    <!-- Premium Back Button Link -->
+    <a href="/" class="back-to-shop back-link">&larr; Back to Shop</a>
+    
+    <!-- The Two-Column Master Split Grid -->
+    <div class="product-detail-grid pdp-grid">
+        
+        <!-- Column 1: Showcase Image Container -->
+        <div class="product-detail-image-wrapper pdp-image">
             <img src="{{ url_for('static', filename='product_images/' + product.image_url) }}"
                  alt="{{ product.name }}"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="image-fallback image-fallback-lg" style="display:none;">{{ product.name[:1] }}</div>
         </div>
-        <div class="pdp-info">
-            <span class="product-category">{{ product.category }}</span>
+        
+        <!-- Column 2: Right-Side Purchase Info Column Structure -->
+        <div class="product-detail-info pdp-info">
+            <span class="category product-category">{{ product.category }}</span>
             <h1>{{ product.name }}</h1>
-            <p class="pdp-price">${{ '%.2f'|format(product.price) }}</p>
-            <p class="pdp-description">{{ product.description }}</p>
+            <p class="price pdp-price">${{ '%.2f'|format(product.price) }}</p>
+            
+            {% if product.description %}
+                <p class="pdp-description" style="color: #666666; font-size: 14px; line-height: 1.6; margin-bottom: 32px;">
+                    {{ product.description }}
+                </p>
+            {% endif %}
 
             {% set in_stock_variants = product.variants|selectattr('stock', 'gt', 0)|list %}
+            
             <form method="POST" action="/add-to-cart/{{ product.id }}" class="pdp-form">
-                <label for="size">Size</label>
                 {% if in_stock_variants %}
-                    <select name="size" id="size">
+                    <label>Size</label>
+                    <div class="size-selector">
                         {% for variant in product.variants %}
-                            <option value="{{ variant.size }}" {% if variant.stock == 0 %}disabled{% endif %}>
-                                {{ variant.size }}{% if variant.stock == 0 %} — Out of stock{% else %} ({{ variant.stock }} left){% endif %}
-                            </option>
+                            <button type="button"
+                                    class="size-btn {% if variant.stock == 0 %}size-btn-disabled{% endif %}"
+                                    data-size="{{ variant.size }}"
+                                    {% if variant.stock == 0 %}disabled{% endif %}>
+                                {{ variant.size }}
+                            </button>
                         {% endfor %}
-                    </select>
+                    </div>
+                    <input type="hidden" name="size" id="selected-size" required>
+
                     <button type="submit" class="btn-primary btn-block">Add to Cart</button>
                 {% else %}
-                    <p class="out-of-stock-msg">Out of stock in all sizes.</p>
+                    <p class="out-of-stock-msg" style="color: #d93838; font-weight: 600; font-size: 14px; margin-top: 16px;">
+                        Out of stock in all sizes.
+                    </p>
                 {% endif %}
             </form>
         </div>
+        
     </div>
 </div>
+
+<script>
+document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (btn.disabled) return;
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.getElementById('selected-size').value = btn.dataset.size;
+    });
+});
+</script>
 {% endblock %}

@@ -96,7 +96,7 @@ h3 { font-size: 16px; margin: 0 0 4px; }
     margin-top: 60px;
 }
 
-/* ---------- Flash messages ---------- */
+/* ---------- Flash messages (toast style) ---------- */
 .flash-wrap {
     max-width: 1440px;
     margin: 16px auto 0;
@@ -104,15 +104,40 @@ h3 { font-size: 16px; margin: 0 0 4px; }
 }
 
 .flash {
-    padding: 12px 16px;
-    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: 8px;
     margin-bottom: 10px;
     font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    border-left: 4px solid transparent;
+    animation: flashIn 0.35s ease, flashOut 0.4s ease 1.6s forwards;
 }
 
-.flash-success { background: #e6f4ea; color: var(--success); }
-.flash-error { background: #fdecea; color: var(--error); }
+.flash-success {
+    background: #e6f4ea;
+    color: var(--success);
+    border-left-color: var(--success);
+}
 
+.flash-error {
+    background: #fdecea;
+    color: var(--error);
+    border-left-color: var(--error);
+}
+
+@keyframes flashIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flashOut {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-8px); }
+}
 /* ---------- Layout helpers ---------- */
 main { max-width: 1440px; margin: 0 auto; padding: 0 24px 40px; }
 .page-narrow { max-width: 640px; margin: 40px auto; padding: 0 24px; }
@@ -575,4 +600,595 @@ label {
 .nav-links a.nav-btn:hover {
     background-color: #ffffff !important; /* Inverts color cleanly on hover */
     color: #000000 !important;            /* Text turns black on hover */
+}
+.product-info h3, 
+.product-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 6px 0 2px 0;
+    color: var(--ink);
+}
+
+.product-category {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+.product-price {
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 6px;
+    color: var(--ink);
+}
+main { 
+    max-width: 1200px; /* Reduced from 1440px to pull items closer for a cozy boutique look */
+    margin: 0 auto; 
+    padding: 40px 24px; 
+}
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center; /* Ensures clothes stay framed perfectly in the middle */
+}
+/* --- Center and clean up the page body wrapper --- */
+main {
+    max-width: 1100px !important; /* Pulls the grid tightly together */
+    margin: 0 auto !important;
+    padding: 40px 24px !important;
+}
+
+/* Elevate the product card layout structure */
+.product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important; /* Slightly larger cards */
+    gap: 32px !important; /* More breathing room between products */
+}
+/* --- Clean Category Filters --- */
+.pill {
+    border: 1px solid #e0e0e0 !important;
+    padding: 8px 18px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    background: #ffffff !important;
+    border-radius: 30px !important;
+    transition: all 0.2s ease !important;
+}
+
+.pill:hover {
+    border-color: var(--ink) !important;
+    background-color: #fafafa !important;
+}
+
+.pill-active {
+    background: var(--ink) !important;
+    color: #ffffff !important;
+    border-color: var(--ink) !important;
+}
+/* ==========================================================
+   PREMIUM PRODUCT DETAIL PAGE OVERHAUL
+   ========================================================== */
+
+
+/* ==========================================================
+   PREMIUM PRODUCT DETAIL PAGE OVERHAUL (FIXED)
+   ========================================================== */
+
+/* 1. Page Layout & Centering Container */
+.product-detail-container {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 60px 24px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+
+/* 3. The Two-Column Master Split Grid */
+.product-detail-grid {
+    display: grid !important;
+    grid-template-columns: 1.1fr 0.9fr !important; /* Image gets slightly more room */
+    gap: 64px !important;                         /* Generous luxury breathing room */
+    align-items: start;
+}
+
+/* 4. Showcase Image Container */
+.product-detail-image-wrapper {
+    background-color: #f7f7f7 !important; /* Soft premium off-white canvas backdrop */
+    border-radius: 12px !important;
+    padding: 30px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product-detail-image-wrapper img {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* 5. Right-Side Purchase Info Column Structure */
+.product-detail-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-detail-info .category {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.2px !important;
+    text-transform: uppercase !important;
+    color: #888888 !important;
+    margin-bottom: 8px !important;
+}
+
+.product-detail-info h1 {
+    font-size: 32px !important; /* Bold, strong product statement size */
+    font-weight: 600 !important;
+    letter-spacing: -0.5px !important;
+    color: #000000 !important;
+    margin: 0 0 12px 0 !important;
+}
+
+.product-detail-info .price {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #111111 !important;
+    margin-bottom: 32px !important;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 24px;
+}
+
+/* 6. Form Label Styles ("Size") */
+.product-detail-info label {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px;
+    color: #222222 !important;
+    margin-bottom: 8px !important;
+    display: block;
+}
+
+/* 7. Modernized Size Selector Dropdown */
+.product-detail-info select {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    border: 1px solid #dddddd !important;
+    border-radius: 6px !important;
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    appearance: none !important; /* Removes native boring arrow style */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 16px !important;
+    cursor: pointer;
+    margin-bottom: 20px !important;
+    transition: border-color 0.2s ease;
+}
+.product-detail-info select:focus {
+    outline: none !important;
+    border-color: #000000 !important;
+}
+
+/* 8. High-End "Add to Cart" Button */
+.product-detail-info button,
+.product-detail-info input[type="submit"] {
+    width: 100% !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    padding: 16px !important; /* Thick, luxury button look */
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    margin-top: 8px;
+}
+
+.product-detail-info button:hover,
+.product-detail-info input[type="submit"]:hover {
+    background-color: #222222 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.product-detail-info button:active,
+.product-detail-info input[type="submit"]:active {
+    transform: translateY(0);
+}
+/* --- Clean Allbirds-Style Pill Buttons --- */
+.nav-links a.nav-btn {
+    background-color: #212121 !important; /* Matches their dark slate accents */
+    color: #ffffff !important;
+    border: none !important;
+    padding: 8px 20px !important;
+    border-radius: 20px !important; /* Perfect pill rounded shape like Allbirds */
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.nav-links a.nav-btn:hover {
+    background-color: #4a4a4a !important;
+    color: #ffffff !important;
+}
+/* --- High-End Text Utilities --- */
+.nav-links {
+    display: flex !important;
+    align-items: center !important;
+    gap: 24px !important;
+}
+
+.nav-links a {
+    color: #000000 !important;
+    text-decoration: none !important;
+    font-size: 11px !important;          /* Tiny, sophisticated font size */
+    font-weight: 500 !important;
+    letter-spacing: 1.5px !important;   /* Breathable letter-spacing */
+    text-transform: uppercase !important;/* All-caps uniform clean structure */
+    transition: opacity 0.2s ease !important;
+}
+
+.nav-links a:hover {
+    opacity: 0.6 !important;            /* Elegant modern micro-fade on hover */
+}
+/* --- High-End Active Pill Highlight --- */
+.pills-container a.active, 
+.pills-container a.pill-active,
+.active-pill {
+    background-color: transparent !important; /* Removes the heavy black background block */
+    color: #000000 !important;               /* Crisp high-contrast text color */
+    border-bottom: 2px solid #000000 !important; /* Adds the subtle brand underline like Everlane */
+    border-radius: 0px !important;            /* Clean crisp edges */
+    font-weight: 600 !important;
+}
+/* --- Elegant Hero & Section Header Hierarchy --- */
+h1.hero-title,
+.product-detail-info h1 {
+    font-size: 28px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    color: #000000 !important;
+    margin-bottom: 12px !important;
+}
+
+p.hero-subtitle,
+.product-category {
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    color: #666666 !important;          /* Softer gray body tone */
+}
+/* --- Universal Fallback Active Pill Style --- */
+.active,
+.pill-active,
+[class*="pill" i][class*="active" i],
+[class*="filter" i] .active {
+    background-color: transparent !important; 
+    color: #000000 !important;               
+    border-bottom: 2px solid #000000 !important; 
+    border-radius: 0px !important;            
+    font-weight: 600 !important;
+}
+/* --- Fine Outline Utility Buttons --- */
+.nav-links a.nav-btn,
+.submit-btn {
+    background-color: transparent !important;
+    color: #000000 !important;
+    border: 1px solid #222222 !important; /* Elegant razor-thin outline */
+    border-radius: 4px !important;        /* Small subtle corner softening */
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;       /* Keeps it looking natural */
+    letter-spacing: 0.2px !important;
+}
+
+.nav-links a.nav-btn:hover {
+    background-color: #000000 !important; /* Perfect high-contrast flip on hover */
+    color: #ffffff !important;
+}
+/* --- Fix: Clean Text Actions & Minimal Status Fields --- */
+
+/* 1. Reset Edit/Delete so they are pure text links (No button borders) */
+td a,
+a[href*="edit" i],
+a[href*="delete" i],
+.actions-cell a {
+    display: inline-block !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    margin-right: 12px !important;
+    cursor: pointer !important;
+}
+
+a[href*="edit" i], .edit-link {
+    color: #2563eb !important; /* Elegant slate tech blue */
+}
+
+a[href*="delete" i], .delete-link {
+    color: #dc2626 !important; /* Clean crimson red for danger actions */
+}
+
+/* 2. Style the "Cancelled" Status Pill Box */
+.status,
+[class*="status-" i] {
+    display: inline-block !important;
+    padding: 4px 10px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border-radius: 4px !important;
+}
+
+/* Specific styling when an order is Cancelled */
+[class*="cancelled" i], 
+.status-cancelled {
+    background-color: #fee2e2 !important; /* Soft pastel red wash */
+    color: #991b1b !important;            /* Muted dark wine red text */
+    border: 1px solid #fca5a5 !important;
+}
+
+/* 3. Give the Status Select Dropdown standard sizing so text doesn't clip */
+select,
+.status-dropdown {
+    min-width: 120px !important; /* Prevents "Cancelled" from squeezing or clipping */
+    padding: 6px 12px !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 6px !important;
+    font-size: 13px !important;
+    background-color: #ffffff !important;
+    color: #374151 !important;
+    cursor: pointer !important;
+}
+/* --- Ultra-Readable Promo Banner --- */
+.banner, 
+div[style*="background-color"][style*="orders over"] {
+    background-color: #111111 !important; /* Rich deep black background */
+    color: #ffffff !important;             /* High contrast crisp white text */
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;      /* Wide letter tracking looks expensive */
+    text-transform: uppercase !important;
+    padding: 10px 0 !important;
+}
+
+.banner a,
+div[style*="background-color"] a {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+    font-weight: 700 !important;
+}
+/* --- Editorial Filter Buttons --- */
+.filter-btn, 
+button[class*="category"],
+.category-filters button {
+    background-color: transparent !important;
+    color: #666666 !important;
+    border: 1px solid #e5e7eb !important;  /* Soft grey frame */
+    border-radius: 0px !important;         /* Razor sharp corners to match product cards */
+    padding: 8px 18px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Active / Hover State */
+.filter-btn.active,
+.filter-btn:hover {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    color: #ffffff !important;
+}
+/* --- Isolated Fiery Outline Hover Effect --- */
+
+
+
+/* 2. Setup the hidden fiery outer ring glow safely inside its bounds */
+.product-card::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -2px !important;
+    left: -2px !important;
+    right: -2px !important;
+    bottom: -2px !important;
+    border-radius: 10px !important;
+    
+    /* Fiery gradient */
+    background: linear-gradient(
+        135deg, 
+        #ff3700, 
+        #ff9d00, 
+        #e60000, 
+        #ff5100
+    ) !important;
+    background-size: 400% 400% !important;
+    
+    z-index: -1 !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+    pointer-events: none !important; /* Prevents layout interference */
+}
+
+/* 3. Reveal and animate ONLY when directly hovering the card */
+.product-card:hover::before {
+    opacity: 1 !important;
+    animation: moltenFireMovement 2.5s ease infinite !important;
+}
+
+@keyframes moltenFireMovement {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+/* ---------- Image Zoom on Hover ---------- */
+
+/* Product grid cards */
+.product-image {
+    overflow: hidden; /* keeps the zoomed image clipped inside the rounded corners */
+}
+
+.product-image img {
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.08);
+}
+
+/* Product detail page (large image) */
+.pdp-image,
+.product-detail-image-wrapper {
+    overflow: hidden;
+}
+
+.pdp-image img,
+.product-detail-image-wrapper img {
+    transition: transform 0.5s ease;
+}
+
+.pdp-image:hover img,
+.product-detail-image-wrapper:hover img {
+    transform: scale(1.1);
+}
+/* --- Size selector --- */
+.size-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 8px 0 20px;
+}
+.size-btn {
+    padding: 14px 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #111;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.size-btn:hover { border-color: #000; }
+.size-btn.selected { background: #000; color: #fff; border-color: #000; }
+.size-btn-disabled, .size-btn:disabled {
+    color: #ccc;
+    border-color: #eee;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* --- Better "Back to Shop" link --- */
+.back-to-shop {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666 !important;
+    text-decoration: none !important;
+    padding: 8px 0;
+    transition: color 0.2s ease, gap 0.2s ease;
+}
+.back-to-shop:hover {
+    color: #000 !important;
+    gap: 10px;
+}
+
+/* --- Image zoom on hover --- */
+.product-detail-image-wrapper { overflow: hidden; }
+.product-detail-image-wrapper img { transition: transform 0.5s ease; }
+.product-detail-image-wrapper:hover img { transform: scale(1.08); }
+
+/* --- Better "Back to Shop" link --- */
+.back-to-shop {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666 !important;
+    text-decoration: none !important;
+    padding: 8px 0;
+    margin-bottom: 20px;
+    transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.back-to-shop:hover {
+    color: #000 !important;
+    gap: 10px; /* arrow slides slightly left on hover */
+}
+
+/* --- Image zoom on hover, Allbirds-style --- */
+.product-detail-image-wrapper {
+    overflow: hidden; /* clips the zoomed image so it doesn't spill past the container */
+    cursor: zoom-in;
+}
+
+.product-detail-image-wrapper img {
+    transition: transform 0.5s ease;
+}
+
+.product-detail-image-wrapper:hover img {
+    transform: scale(1.1);
+}
+/* --- Image zoom on hover, Allbirds-style --- */
+.product-detail-image-wrapper {
+    overflow: hidden !important;
+    cursor: zoom-in;
+}
+
+.product-detail-image-wrapper img {
+    transition: transform 0.5s ease !important;
+}
+
+.product-detail-image-wrapper:hover img {
+    transform: scale(1.15) !important;
+}
+.back-to-shop {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;         /* stops it from stretching full width */
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000 !important;
+    text-decoration: none !important;
+    background: #fff !important;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 18px;
+    margin-bottom: 24px;
+    transition: all 0.2s ease;
+}
+
+.back-to-shop:hover {
+    background: #000 !important;
+    color: #fff !important;
+    border-color: #000;
 }
