@@ -1,9 +1,6 @@
 /* ==========================================================
-   THREADLINE PREMIUM CSS (starter replacement)
-   NOTE:
-   A complete end-to-end redesign is too large for a single model
-   response. This file preserves your stylesheet and applies
-   foundational improvements as a downloadable replacement.
+   THREADLINE — CLEAN CONSOLIDATED STYLESHEET
+   All duplicate rules merged. Latest values from your file kept.
    ========================================================== */
 
 :root {
@@ -49,6 +46,7 @@ h3 { font-size: 16px; margin: 0 0 4px; }
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 24px;
 }
 
 .logo {
@@ -57,6 +55,20 @@ h3 { font-size: 16px; margin: 0 0 4px; }
     font-size: 18px;
     letter-spacing: 2px;
     text-decoration: none;
+    flex-shrink: 0;
+}
+
+/* Search input in header — fixed to not overflow the row */
+.header-inner input {
+    width: 100%;
+    max-width: 800px;
+    margin-left: 40px;
+    flex: 1;
+    min-width: 0; /* lets it shrink instead of forcing overflow */
+}
+
+.header-inner nav {
+    flex-shrink: 0;
 }
 
 .site-header nav a {
@@ -67,8 +79,6 @@ h3 { font-size: 16px; margin: 0 0 4px; }
 }
 
 .site-header nav a:hover { color: #fff; }
-
-
 
 .nav-cta {
     background: #fff;
@@ -85,6 +95,76 @@ h3 { font-size: 16px; margin: 0 0 4px; }
     padding: 2px 6px;
     border-radius: 10px;
     margin-left: 2px;
+}
+
+/* ---------- Nav links & logout button ---------- */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: nowrap;
+}
+
+.nav-links a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.6;
+}
+
+.nav-links a.nav-btn,
+.submit-btn {
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid #222222;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0.2px;
+    opacity: 1;
+}
+
+.nav-links a.nav-btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* ---------- Announcement Bar ---------- */
+.announcement-bar,
+.banner,
+div[style*="background-color"][style*="orders over"] {
+    background-color: #111111;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 24px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--line);
+}
+
+.announcement-bar span {
+    display: inline-block;
+    transition: opacity 0.4s ease;
+}
+
+.announcement-bar a,
+.banner a,
+div[style*="background-color"] a {
+    color: #ffffff;
+    text-decoration: underline;
+    font-weight: 700;
+    margin-left: 4px;
 }
 
 /* ---------- Footer ---------- */
@@ -138,19 +218,39 @@ h3 { font-size: 16px; margin: 0 0 4px; }
     from { opacity: 1; transform: translateY(0); }
     to   { opacity: 0; transform: translateY(-8px); }
 }
+
 /* ---------- Layout helpers ---------- */
-main { max-width: 1440px; margin: 0 auto; padding: 0 24px 40px; }
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 24px 40px;
+}
 .page-narrow { max-width: 640px; margin: 40px auto; padding: 0 24px; }
 .page-wide { padding-top: 20px; }
 
 /* ---------- Hero ---------- */
 .hero {
     text-align: center;
-    padding: 60px 20px 40px;
+    padding: 45px 20px 40px;
 }
 
-.hero h1 { font-size: 36px; margin-bottom: 8px; }
-.hero p { color: var(--ink-soft); font-size: 16px; }
+.hero h1,
+h1.hero-title {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.hero p,
+p.hero-subtitle {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #666666;
+}
 
 /* ---------- Shop toolbar ---------- */
 .shop-toolbar {
@@ -158,6 +258,11 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 24px 40px; }
     flex-direction: column;
     gap: 16px;
     margin-bottom: 28px;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    z-index: 5;
+    padding-top: 8px;
 }
 
 .search-form {
@@ -177,26 +282,52 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 24px 40px; }
     text-decoration: underline;
 }
 
-.category-pills {
+.category-pills,
+.pills-container {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
 }
 
-.pill {
-    border: 1px solid var(--line);
-    padding: 6px 16px;
-    border-radius: 20px;
+.pill,
+.filter-btn,
+button[class*="category"],
+.category-filters button {
+    border: 1px solid #e0e0e0;
+    padding: 8px 18px;
+    border-radius: 30px;
     text-decoration: none;
-    font-size: 14px;
-    color: var(--ink);
-    background: var(--card);
+    font-size: 13px;
+    font-weight: 500;
+    color: #666666;
+    background: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.pill-active {
-    background: var(--ink);
-    color: #fff;
+.pill:hover,
+.filter-btn:hover {
     border-color: var(--ink);
+    background-color: #fafafa;
+}
+
+/* Single source of truth for the "active" pill state */
+.pill-active,
+.active,
+.pills-container a.active,
+.pills-container a.pill-active,
+.active-pill,
+.filter-btn.active,
+[class*="pill" i][class*="active" i],
+[class*="filter" i] .active {
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid transparent;
+    border-bottom: 2px solid #000000;
+    border-radius: 0px;
+    font-weight: 600;
 }
 
 /* ---------- Buttons & forms ---------- */
@@ -221,7 +352,7 @@ button, .btn-primary, .btn-secondary {
 .btn-secondary {
     background: #fff;
     color: var(--ink);
-    border: 1px solid var(--line) !important;
+    border: 1px solid var(--line);
 }
 .btn-secondary:hover { background: #f2f2f2; }
 
@@ -278,11 +409,12 @@ label {
 /* ---------- Product grid ---------- */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 32px;
 }
 
 .product-card {
+    position: relative;
     text-decoration: none;
     color: inherit;
     background: var(--card);
@@ -310,6 +442,12 @@ label {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.08);
 }
 
 .image-fallback {
@@ -327,8 +465,16 @@ label {
 
 .product-info { padding: 14px 16px 18px; }
 
+.product-info h3,
+.product-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 6px 0 2px 0;
+    color: var(--ink);
+}
+
 .product-category {
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--ink-soft);
@@ -336,7 +482,9 @@ label {
 
 .product-price {
     font-weight: 700;
-    margin-top: 4px;
+    font-size: 14px;
+    margin-top: 6px;
+    color: var(--ink);
 }
 
 .empty-state {
@@ -357,6 +505,32 @@ label {
     font-size: 14px;
 }
 
+.back-to-shop {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 18px;
+    margin-bottom: 24px;
+    transition: all 0.2s ease;
+}
+
+.back-to-shop:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+    gap: 10px;
+}
+
 .pdp-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -371,9 +545,17 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: zoom-in;
 }
 
-.pdp-image img { width: 100%; height: 100%; object-fit: cover; }
+.pdp-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.pdp-image:hover img { transform: scale(1.1); }
 
 .pdp-price { font-size: 22px; font-weight: 700; margin: 6px 0 16px; }
 .pdp-description { color: var(--ink-soft); margin-bottom: 8px; }
@@ -382,6 +564,166 @@ label {
 
 @media (max-width: 700px) {
     .pdp-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Premium Product Detail Page ---------- */
+.product-detail-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.product-detail-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+    align-items: start;
+}
+
+.product-detail-image-wrapper {
+    background-color: #f7f7f7;
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+.product-detail-image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+.product-detail-image-wrapper:hover img {
+    transform: scale(1.15);
+}
+
+.product-detail-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-detail-info .category {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #888888;
+    margin-bottom: 8px;
+}
+
+.product-detail-info h1 {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.product-detail-info .price {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 24px;
+}
+
+.product-detail-info label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #222222;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.product-detail-info select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #111111;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: border-color 0.2s ease;
+}
+
+.product-detail-info select:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.product-detail-info button,
+.product-detail-info input[type="submit"] {
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+}
+
+.product-detail-info button:hover,
+.product-detail-info input[type="submit"]:hover {
+    background-color: #222222;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.product-detail-info button:active,
+.product-detail-info input[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* ---------- Size selector ---------- */
+.size-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 8px 0 20px;
+}
+.size-btn {
+    padding: 14px 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #111;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.size-btn:hover { border-color: #000; }
+.size-btn.selected { background: #000; color: #fff; border-color: #000; }
+.size-btn-disabled, .size-btn:disabled {
+    color: #ccc;
+    border-color: #eee;
+    cursor: not-allowed;
+    text-decoration: line-through;
 }
 
 /* ---------- Auth pages ---------- */
@@ -470,17 +812,27 @@ label {
 
 .confirm-banner { text-align: center; margin-bottom: 24px; }
 
-.status-badge {
+.status-badge,
+.status,
+[class*="status-" i] {
+    display: inline-block;
     font-size: 12px;
     padding: 3px 10px;
     border-radius: 12px;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .status-pending { background: #fff4e0; color: #a05a00; }
 .status-shipped { background: #e3edff; color: #1a4fb4; }
 .status-delivered { background: #e6f4ea; color: var(--success); }
-.status-cancelled { background: #fdecea; color: var(--error); }
+.status-cancelled,
+[class*="cancelled" i] {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
 
 /* ---------- Admin ---------- */
 .admin-header {
@@ -516,523 +868,66 @@ label {
 }
 
 .actions-cell { vertical-align: middle; }
-.actions-cell a { display: block; margin-bottom: 6px; font-size: 13px; text-decoration: underline; }
+
+.actions-cell a,
+td a,
+a[href*="edit" i],
+a[href*="delete" i] {
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+a[href*="edit" i], .edit-link {
+    color: #2563eb;
+}
+
+a[href*="delete" i], .delete-link {
+    color: #dc2626;
+}
 
 .admin-form { max-width: 480px; }
 .variant-section-title { margin-top: 30px; }
 .variant-list { padding-left: 18px; color: var(--ink-soft); font-size: 14px; }
 
-/* --- Direct Fix to Make the Header Search Bar Wider --- */
-.header-inner input {
-    width: 800px !important; /* Increase this number (e.g., 500px) to make it even wider */
-    max-width: 800px !important; /* Ensures it doesn't exceed the desired width */
-    margin-left: 80px;       /* Adds clean breathing room between the title and the input */
-}
-
-/* Optional: This stops the navigation links from getting squished by the wider search bar */
-.header-inner nav {
-    white-space: nowrap;
-}
-/* ---------- Announcement Bar ---------- */
-.announcement-bar {
-    background-color: #f2f0eb;       
-    color: var(--ink);               
-    text-align: center;
-    padding: 10px 24px;              
-    font-size: 11px;                 
-    font-weight: 600;                
-    letter-spacing: 1.5px;           
-    text-transform: uppercase;       
-    border-bottom: 1px solid var(--line);
-}
-
-/* Forces the text container to stay locked in layout while transitioning */
-.announcement-bar span {
-    display: inline-block;
-    transition: opacity 0.4s ease;
-}
-
-.announcement-bar a {
-    color: var(--ink);
-    text-decoration: underline;
-    margin-left: 4px;
-}
-/* ==========================================================
-   REVISED NAVBAR LINKS & LOGOUT BUTTON
-   ========================================================== */
-
-/* Container for all the links */
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 20px;          /* Clean, balanced spacing */
-}
-
-/* Individual text link styling */
-.nav-links a {
-    color: #ddd !important;       /* Soft white/grey text */
-    text-decoration: none;
-    font-size: 14px;              /* Standard, legible size matching your original style */
-    font-weight: 500;
-    text-transform: none;         /* Removes the loud uppercase format */
-    letter-spacing: normal;       /* Resets letter spacing for natural reading */
-    transition: color 0.2s ease;
-}
-
-/* Hover state for normal links */
-.nav-links a:hover {
-    color: #ffffff !important;    /* Pure white on hover */
-}
-
-/* ---------- The Black Logout Button ---------- */
-.nav-links a.nav-btn {
-    background-color: #000000 !important; /* Pure black button background */
-    color: #ffffff !important;            /* Clean white text */
-    border: 1px solid #ffffff !important; /* Crisp white border to stand out on the navbar */
-    padding: 6px 16px !important;         /* Sleek padding dimensions */
-    border-radius: 4px;                   /* Subtle modern corner rounded edges */
-    font-size: 13px !important;           /* Slightly smaller font for an elegant look */
-    font-weight: 600;
-    transition: all 0.2s ease !important;
-}
-
-/* Hover Effect for the Logout button */
-.nav-links a.nav-btn:hover {
-    background-color: #ffffff !important; /* Inverts color cleanly on hover */
-    color: #000000 !important;            /* Text turns black on hover */
-}
-.product-info h3, 
-.product-card-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin: 6px 0 2px 0;
-    color: var(--ink);
-}
-
-.product-category {
-    font-size: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-}
-
-.product-price {
-    font-weight: 700;
-    font-size: 14px;
-    margin-top: 6px;
-    color: var(--ink);
-}
-main { 
-    max-width: 1200px; /* Reduced from 1440px to pull items closer for a cozy boutique look */
-    margin: 0 auto; 
-    padding: 40px 24px; 
-}
-.product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center; /* Ensures clothes stay framed perfectly in the middle */
-}
-/* --- Center and clean up the page body wrapper --- */
-main {
-    max-width: 1100px !important; /* Pulls the grid tightly together */
-    margin: 0 auto !important;
-    padding: 40px 24px !important;
-}
-
-/* Elevate the product card layout structure */
-.product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important; /* Slightly larger cards */
-    gap: 32px !important; /* More breathing room between products */
-}
-/* --- Clean Category Filters --- */
-.pill {
-    border: 1px solid #e0e0e0 !important;
-    padding: 8px 18px !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    background: #ffffff !important;
-    border-radius: 30px !important;
-    transition: all 0.2s ease !important;
-}
-
-.pill:hover {
-    border-color: var(--ink) !important;
-    background-color: #fafafa !important;
-}
-
-.pill-active {
-    background: var(--ink) !important;
-    color: #ffffff !important;
-    border-color: var(--ink) !important;
-}
-/* ==========================================================
-   PREMIUM PRODUCT DETAIL PAGE OVERHAUL
-   ========================================================== */
-
-
-/* ==========================================================
-   PREMIUM PRODUCT DETAIL PAGE OVERHAUL (FIXED)
-   ========================================================== */
-
-/* 1. Page Layout & Centering Container */
-.product-detail-container {
-    max-width: 1100px !important;
-    margin: 0 auto !important;
-    padding: 60px 24px !important;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-
-
-/* 3. The Two-Column Master Split Grid */
-.product-detail-grid {
-    display: grid !important;
-    grid-template-columns: 1.1fr 0.9fr !important; /* Image gets slightly more room */
-    gap: 64px !important;                         /* Generous luxury breathing room */
-    align-items: start;
-}
-
-/* 4. Showcase Image Container */
-.product-detail-image-wrapper {
-    background-color: #f7f7f7 !important; /* Soft premium off-white canvas backdrop */
-    border-radius: 12px !important;
-    padding: 30px !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.product-detail-image-wrapper img {
-    max-width: 100% !important;
-    height: auto !important;
-    object-fit: contain !important;
-}
-
-/* 5. Right-Side Purchase Info Column Structure */
-.product-detail-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.product-detail-info .category {
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    letter-spacing: 1.2px !important;
-    text-transform: uppercase !important;
-    color: #888888 !important;
-    margin-bottom: 8px !important;
-}
-
-.product-detail-info h1 {
-    font-size: 32px !important; /* Bold, strong product statement size */
-    font-weight: 600 !important;
-    letter-spacing: -0.5px !important;
-    color: #000000 !important;
-    margin: 0 0 12px 0 !important;
-}
-
-.product-detail-info .price {
-    font-size: 22px !important;
-    font-weight: 700 !important;
-    color: #111111 !important;
-    margin-bottom: 32px !important;
-    border-bottom: 1px solid #eeeeee;
-    padding-bottom: 24px;
-}
-
-/* 6. Form Label Styles ("Size") */
-.product-detail-info label {
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px;
-    color: #222222 !important;
-    margin-bottom: 8px !important;
-    display: block;
-}
-
-/* 7. Modernized Size Selector Dropdown */
-.product-detail-info select {
-    width: 100% !important;
-    padding: 12px 16px !important;
-    font-size: 14px !important;
-    border: 1px solid #dddddd !important;
-    border-radius: 6px !important;
-    background-color: #ffffff !important;
-    color: #111111 !important;
-    appearance: none !important; /* Removes native boring arrow style */
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
-    background-repeat: no-repeat !important;
-    background-position: right 12px center !important;
-    background-size: 16px !important;
-    cursor: pointer;
-    margin-bottom: 20px !important;
-    transition: border-color 0.2s ease;
-}
-.product-detail-info select:focus {
-    outline: none !important;
-    border-color: #000000 !important;
-}
-
-/* 8. High-End "Add to Cart" Button */
-.product-detail-info button,
-.product-detail-info input[type="submit"] {
-    width: 100% !important;
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    padding: 16px !important; /* Thick, luxury button look */
-    font-size: 14px !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    border: none !important;
-    border-radius: 6px !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    margin-top: 8px;
-}
-
-.product-detail-info button:hover,
-.product-detail-info input[type="submit"]:hover {
-    background-color: #222222 !important;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-.product-detail-info button:active,
-.product-detail-info input[type="submit"]:active {
-    transform: translateY(0);
-}
-/* --- Clean Allbirds-Style Pill Buttons --- */
-.nav-links a.nav-btn {
-    background-color: #212121 !important; /* Matches their dark slate accents */
-    color: #ffffff !important;
-    border: none !important;
-    padding: 8px 20px !important;
-    border-radius: 20px !important; /* Perfect pill rounded shape like Allbirds */
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-}
-
-.nav-links a.nav-btn:hover {
-    background-color: #4a4a4a !important;
-    color: #ffffff !important;
-}
-/* --- High-End Text Utilities --- */
-.nav-links {
-    display: flex !important;
-    align-items: center !important;
-    gap: 24px !important;
-}
-
-.nav-links a {
-    color: #000000 !important;
-    text-decoration: none !important;
-    font-size: 11px !important;          /* Tiny, sophisticated font size */
-    font-weight: 500 !important;
-    letter-spacing: 1.5px !important;   /* Breathable letter-spacing */
-    text-transform: uppercase !important;/* All-caps uniform clean structure */
-    transition: opacity 0.2s ease !important;
-}
-
-.nav-links a:hover {
-    opacity: 0.6 !important;            /* Elegant modern micro-fade on hover */
-}
-/* --- High-End Active Pill Highlight --- */
-.pills-container a.active, 
-.pills-container a.pill-active,
-.active-pill {
-    background-color: transparent !important; /* Removes the heavy black background block */
-    color: #000000 !important;               /* Crisp high-contrast text color */
-    border-bottom: 2px solid #000000 !important; /* Adds the subtle brand underline like Everlane */
-    border-radius: 0px !important;            /* Clean crisp edges */
-    font-weight: 600 !important;
-}
-/* --- Elegant Hero & Section Header Hierarchy --- */
-h1.hero-title,
-.product-detail-info h1 {
-    font-size: 28px !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.5px !important;
-    text-transform: uppercase !important;
-    color: #000000 !important;
-    margin-bottom: 12px !important;
-}
-
-p.hero-subtitle,
-.product-category {
-    font-size: 11px !important;
-    letter-spacing: 1px !important;
-    text-transform: uppercase !important;
-    color: #666666 !important;          /* Softer gray body tone */
-}
-/* --- Universal Fallback Active Pill Style --- */
-.active,
-.pill-active,
-[class*="pill" i][class*="active" i],
-[class*="filter" i] .active {
-    background-color: transparent !important; 
-    color: #000000 !important;               
-    border-bottom: 2px solid #000000 !important; 
-    border-radius: 0px !important;            
-    font-weight: 600 !important;
-}
-/* --- Fine Outline Utility Buttons --- */
-.nav-links a.nav-btn,
-.submit-btn {
-    background-color: transparent !important;
-    color: #000000 !important;
-    border: 1px solid #222222 !important; /* Elegant razor-thin outline */
-    border-radius: 4px !important;        /* Small subtle corner softening */
-    padding: 8px 16px !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    text-transform: none !important;       /* Keeps it looking natural */
-    letter-spacing: 0.2px !important;
-}
-
-.nav-links a.nav-btn:hover {
-    background-color: #000000 !important; /* Perfect high-contrast flip on hover */
-    color: #ffffff !important;
-}
-/* --- Fix: Clean Text Actions & Minimal Status Fields --- */
-
-/* 1. Reset Edit/Delete so they are pure text links (No button borders) */
-td a,
-a[href*="edit" i],
-a[href*="delete" i],
-.actions-cell a {
-    display: inline-block !important;
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    text-decoration: none !important;
-    margin-right: 12px !important;
-    cursor: pointer !important;
-}
-
-a[href*="edit" i], .edit-link {
-    color: #2563eb !important; /* Elegant slate tech blue */
-}
-
-a[href*="delete" i], .delete-link {
-    color: #dc2626 !important; /* Clean crimson red for danger actions */
-}
-
-/* 2. Style the "Cancelled" Status Pill Box */
-.status,
-[class*="status-" i] {
-    display: inline-block !important;
-    padding: 4px 10px !important;
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    border-radius: 4px !important;
-}
-
-/* Specific styling when an order is Cancelled */
-[class*="cancelled" i], 
-.status-cancelled {
-    background-color: #fee2e2 !important; /* Soft pastel red wash */
-    color: #991b1b !important;            /* Muted dark wine red text */
-    border: 1px solid #fca5a5 !important;
-}
-
-/* 3. Give the Status Select Dropdown standard sizing so text doesn't clip */
 select,
 .status-dropdown {
-    min-width: 120px !important; /* Prevents "Cancelled" from squeezing or clipping */
-    padding: 6px 12px !important;
-    border: 1px solid #d1d5db !important;
-    border-radius: 6px !important;
-    font-size: 13px !important;
-    background-color: #ffffff !important;
-    color: #374151 !important;
-    cursor: pointer !important;
-}
-/* --- Ultra-Readable Promo Banner --- */
-.banner, 
-div[style*="background-color"][style*="orders over"] {
-    background-color: #111111 !important; /* Rich deep black background */
-    color: #ffffff !important;             /* High contrast crisp white text */
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    letter-spacing: 1.5px !important;      /* Wide letter tracking looks expensive */
-    text-transform: uppercase !important;
-    padding: 10px 0 !important;
+    min-width: 120px;
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 13px;
+    background-color: #ffffff;
+    color: #374151;
+    cursor: pointer;
 }
 
-.banner a,
-div[style*="background-color"] a {
-    color: #ffffff !important;
-    text-decoration: underline !important;
-    font-weight: 700 !important;
-}
-/* --- Editorial Filter Buttons --- */
-.filter-btn, 
-button[class*="category"],
-.category-filters button {
-    background-color: transparent !important;
-    color: #666666 !important;
-    border: 1px solid #e5e7eb !important;  /* Soft grey frame */
-    border-radius: 0px !important;         /* Razor sharp corners to match product cards */
-    padding: 8px 18px !important;
-    font-size: 12px !important;
-    font-weight: 500 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease-in-out !important;
-}
-
-/* Active / Hover State */
-.filter-btn.active,
-.filter-btn:hover {
-    background-color: #000000 !important;
-    border-color: #000000 !important;
-    color: #ffffff !important;
-}
-/* --- Isolated Fiery Outline Hover Effect --- */
-
-
-
-/* 2. Setup the hidden fiery outer ring glow safely inside its bounds */
+/* ---------- Product card hover glow ---------- */
 .product-card::before {
-    content: '' !important;
-    position: absolute !important;
-    top: -2px !important;
-    left: -2px !important;
-    right: -2px !important;
-    bottom: -2px !important;
-    border-radius: 10px !important;
-    
-    /* Fiery gradient */
-    background: linear-gradient(
-        135deg, 
-        #ff3700, 
-        #ff9d00, 
-        #e60000, 
-        #ff5100
-    ) !important;
-    background-size: 400% 400% !important;
-    
-    z-index: -1 !important;
-    opacity: 0 !important;
-    transition: opacity 0.3s ease !important;
-    pointer-events: none !important; /* Prevents layout interference */
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ff3700, #ff9d00, #e60000, #ff5100);
+    background-size: 400% 400%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
-/* 3. Reveal and animate ONLY when directly hovering the card */
 .product-card:hover::before {
-    opacity: 1 !important;
-    animation: moltenFireMovement 2.5s ease infinite !important;
+    opacity: 1;
+    animation: moltenFireMovement 2.5s ease infinite;
 }
 
 @keyframes moltenFireMovement {
@@ -1040,164 +935,15 @@ button[class*="category"],
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-/* ---------- Image Zoom on Hover ---------- */
 
-/* Product grid cards */
-.product-image {
-    overflow: hidden; /* keeps the zoomed image clipped inside the rounded corners */
-}
-
-.product-image img {
-    transition: transform 0.4s ease;
-}
-
-.product-card:hover .product-image img {
-    transform: scale(1.08);
-}
-
-/* Product detail page (large image) */
-.pdp-image,
-.product-detail-image-wrapper {
-    overflow: hidden;
-}
-
-.pdp-image img,
-.product-detail-image-wrapper img {
-    transition: transform 0.5s ease;
-}
-
-.pdp-image:hover img,
-.product-detail-image-wrapper:hover img {
-    transform: scale(1.1);
-}
-/* --- Size selector --- */
-.size-selector {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin: 8px 0 20px;
-}
-.size-btn {
-    padding: 14px 0;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #111;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-.size-btn:hover { border-color: #000; }
-.size-btn.selected { background: #000; color: #fff; border-color: #000; }
-.size-btn-disabled, .size-btn:disabled {
-    color: #ccc;
-    border-color: #eee;
-    cursor: not-allowed;
-    text-decoration: line-through;
-}
-
-/* --- Better "Back to Shop" link --- */
-.back-to-shop {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #666 !important;
-    text-decoration: none !important;
-    padding: 8px 0;
-    transition: color 0.2s ease, gap 0.2s ease;
-}
-.back-to-shop:hover {
-    color: #000 !important;
-    gap: 10px;
-}
-
-/* --- Image zoom on hover --- */
-.product-detail-image-wrapper { overflow: hidden; }
-.product-detail-image-wrapper img { transition: transform 0.5s ease; }
-.product-detail-image-wrapper:hover img { transform: scale(1.08); }
-
-/* --- Better "Back to Shop" link --- */
-.back-to-shop {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #666 !important;
-    text-decoration: none !important;
-    padding: 8px 0;
-    margin-bottom: 20px;
-    transition: color 0.2s ease, gap 0.2s ease;
-}
-
-.back-to-shop:hover {
-    color: #000 !important;
-    gap: 10px; /* arrow slides slightly left on hover */
-}
-
-/* --- Image zoom on hover, Allbirds-style --- */
-.product-detail-image-wrapper {
-    overflow: hidden; /* clips the zoomed image so it doesn't spill past the container */
-    cursor: zoom-in;
-}
-
-.product-detail-image-wrapper img {
-    transition: transform 0.5s ease;
-}
-
-.product-detail-image-wrapper:hover img {
-    transform: scale(1.1);
-}
-/* --- Image zoom on hover, Allbirds-style --- */
-.product-detail-image-wrapper {
-    overflow: hidden !important;
-    cursor: zoom-in;
-}
-
-.product-detail-image-wrapper img {
-    transition: transform 0.5s ease !important;
-}
-
-.product-detail-image-wrapper:hover img {
-    transform: scale(1.15) !important;
-}
-.back-to-shop {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    width: fit-content;         /* stops it from stretching full width */
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #000 !important;
-    text-decoration: none !important;
-    background: #fff !important;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px 18px;
-    margin-bottom: 24px;
-    transition: all 0.2s ease;
-}
-
-.back-to-shop:hover {
-    background: #000 !important;
-    color: #fff !important;
-    border-color: #000;
-}
-
-/* --- Reduce hero spacing by 25% --- */
-main {
-    padding-top: 30px !important;   /* was 40px */
-}
-
-.hero {
-    padding: 45px 20px 40px !important;   /* top was 60px, now 45px */
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .header-inner {
+        flex-wrap: wrap;
+    }
+    .header-inner input {
+        margin-left: 0;
+        order: 3;
+        max-width: 100%;
+    }
 }
