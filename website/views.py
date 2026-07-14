@@ -46,14 +46,14 @@ def add_to_cart(product_id):
 
     variant = Variant.query.filter_by(product_id=product_id, size=size).first()
     if not variant or variant.stock < 1:
-        flash('Sorry, that size is out of stock.', 'error')
+        flash('That size is currently sold out.', 'error')
         return redirect(url_for('views.product_detail', product_id=product_id))
 
     if current_user.is_authenticated:
         existing_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product_id, size=size).first()
         if existing_item:
             if existing_item.quantity + 1 > variant.stock:
-                flash('No more stock available for that size.', 'error')
+                flash('You have reached the available stock for this size.', 'error')
                 return redirect(url_for('views.product_detail', product_id=product_id))
             existing_item.quantity += 1
         else:
@@ -64,7 +64,7 @@ def add_to_cart(product_id):
         for entry in cart:
             if entry['product_id'] == product_id and entry['size'] == size:
                 if entry['quantity'] + 1 > variant.stock:
-                    flash('No more stock available for that size.', 'error')
+                    flash('You have reached the available stock for this size.', 'error')
                     return redirect(url_for('views.product_detail', product_id=product_id))
                 entry['quantity'] += 1
                 break
@@ -73,7 +73,7 @@ def add_to_cart(product_id):
         session['cart'] = cart
         session.modified = True
 
-    flash(f'{product.name} ({size}) added to your cart.', 'success')
+    flash(f'{product.name} • Size {size} added to your cart.', 'success')
     return redirect(url_for('views.product_detail', product_id=product_id))
 
 
@@ -116,7 +116,7 @@ def update_cart_item(key):
         if new_qty <= 0:
             db.session.delete(item)
         elif variant and new_qty > variant.stock:
-            flash(f'Only {variant.stock} left in stock for that size.', 'error')
+            flash(f'Only {variant.stock} left in stock for Size {item.size}.', 'error')
         else:
             item.quantity = new_qty
         db.session.commit()
@@ -131,7 +131,7 @@ def update_cart_item(key):
                 if new_qty <= 0:
                     cart.remove(entry)
                 elif variant and new_qty > variant.stock:
-                    flash(f'Only {variant.stock} left in stock for that size.', 'error')
+                    flash(f'Only {variant.stock} left in stock for Size {size}.', 'error')
                 else:
                     entry['quantity'] = new_qty
                 break

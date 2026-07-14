@@ -226,47 +226,188 @@ div[style*="background-color"] a {
     margin-top: 60px;
 }
 
-/* ---------- Flash messages (toast style) ---------- */
-.flash-wrap {
-    max-width: 1440px;
-    margin: 16px auto 0;
-    padding: 0 24px;
+/* ---------- Premium Burger Toasts ---------- */
+
+.flash-wrap{
+    position:fixed;
+    top:90px;
+    right:24px;
+    z-index:9999;
+
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+
+    width:380px;
+    max-width:calc(100vw - 32px);
 }
 
-.flash {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 18px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    border-left: 4px solid transparent;
-    animation: flashIn 0.35s ease, flashOut 0.4s ease 1.6s forwards;
+.flash{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+    padding:18px 22px;
+
+    background:#ffffff;
+    color:var(--ink);
+
+    border-radius:14px;
+    overflow:hidden;
+
+    border:1px solid rgba(0,0,0,.08);
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.12),
+        0 6px 12px rgba(0,0,0,.08);
+
+    animation:
+        burgerIn .45s cubic-bezier(.18,.9,.3,1),
+        burgerOut .45s ease 4.8s forwards;
 }
 
-.flash-success {
-    background: var(--success-bg);
-    color: var(--success);
-    border-left-color: var(--success);
+/* coloured left strip */
+
+.flash::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:7px;
+    background:var(--accent);
 }
 
-.flash-error {
-    background: var(--error-bg);
-    color: var(--error);
-    border-left-color: var(--error);
+/* subtle highlight */
+
+.flash::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,.45),
+        transparent 35%
+    );
+    pointer-events:none;
 }
 
-@keyframes flashIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
+/* icon */
+
+.flash i,
+.flash .icon{
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
+    flex-shrink:0;
+
+    background:#f5f5f5;
 }
 
-@keyframes flashOut {
-    from { opacity: 1; transform: translateY(0); }
-    to   { opacity: 0; transform: translateY(-8px); }
+/* text */
+
+.flash strong{
+    display:block;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:3px;
+}
+
+.flash span,
+.flash p{
+    margin:0;
+    font-size:14px;
+    color:var(--ink-soft);
+}
+
+/* Success */
+
+.flash-success::before{
+    background:var(--success);
+}
+
+.flash-success .icon{
+    background:var(--success-bg);
+    color:var(--success);
+}
+
+/* Error */
+
+.flash-error::before{
+    background:var(--error);
+}
+
+.flash-error .icon{
+    background:var(--error-bg);
+    color:var(--error);
+}
+
+/* Info */
+
+.flash-info::before{
+    background:var(--info);
+}
+
+.flash-info .icon{
+    background:var(--info-bg);
+    color:var(--info);
+}
+
+/* Hover */
+
+.flash:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 24px 55px rgba(0,0,0,.18),
+        0 10px 20px rgba(0,0,0,.10);
+}
+
+/* Animations */
+
+@keyframes burgerIn{
+
+    from{
+        opacity:0;
+        transform:
+            translateX(120%)
+            scale(.92);
+    }
+
+    70%{
+        transform:
+            translateX(-8px)
+            scale(1.01);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateX(0)
+            scale(1);
+    }
+
+}
+
+@keyframes burgerOut{
+
+    to{
+        opacity:0;
+        transform:
+            translateX(120%)
+            scale(.96);
+    }
+
 }
 
 /* ---------- Layout helpers ---------- */
